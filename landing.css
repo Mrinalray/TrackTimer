@@ -2,8 +2,8 @@
   --bg: #0b0f14;
   --card: rgba(255,255,255,0.05);
   --glass: rgba(255,255,255,0.08);
-  --neon: #00ff9c;
-  --text: #ffffff;
+  --neon: #d7bc1f;
+  --text: #d75757;
   --muted: #94a3b8;
   --radius: 14px;
   --gap: 20px;
@@ -17,7 +17,7 @@ html[data-theme="light"]{
   --bg: #f7f8fb;
   --card: rgba(0,0,0,0.03);
   --glass: rgba(0,0,0,0.02);
-  --neon: #18e01c;
+  --neon: #caae3f;
   --text: #0b1220;
   --muted: #6b7280;
 }
