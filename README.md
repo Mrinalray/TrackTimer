@@ -3,6 +3,7 @@
 This project is officially accepted for:
 
 ![JWoC Banner](assets/jwoc-banner.png)
+[JWoC Accepted](assets/jwoc-accepted.png)
 
 ⚡ TrackTimer – Your Personalised Study Timer
 
