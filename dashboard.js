@@ -6,6 +6,61 @@ setInterval(function () {
   clock.innerHTML = date.toLocaleTimeString();
 }, 1000);
 
+// ===== Custom Modal =====
+const customModal = document.getElementById('customModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalInput = document.getElementById('modalInput');
+const modalConfirm = document.getElementById('modalConfirm');
+const modalCancel = document.getElementById('modalCancel');
+
+// Custom prompt function that returns a Promise
+function customPrompt(title) {
+  return new Promise((resolve) => {
+    modalTitle.textContent = title;
+    modalInput.value = '';
+    customModal.classList.remove('hidden');
+    modalInput.focus();
+
+    // Handle confirm
+    const handleConfirm = () => {
+      const value = modalInput.value.trim();
+      customModal.classList.add('hidden');
+      cleanup();
+      resolve(value || null);
+    };
+
+    // Handle cancel
+    const handleCancel = () => {
+      customModal.classList.add('hidden');
+      cleanup();
+      resolve(null);
+    };
+
+    // Handle Enter key
+    const handleKeypress = (e) => {
+      if (e.key === 'Enter') {
+        handleConfirm();
+      } else if (e.key === 'Escape') {
+        handleCancel();
+      }
+    };
+
+    // Add event listeners
+    modalConfirm.addEventListener('click', handleConfirm);
+    modalCancel.addEventListener('click', handleCancel);
+    modalInput.addEventListener('keypress', handleKeypress);
+    customModal.addEventListener('keydown', handleKeypress);
+
+    // Cleanup function to remove event listeners
+    function cleanup() {
+      modalConfirm.removeEventListener('click', handleConfirm);
+      modalCancel.removeEventListener('click', handleCancel);
+      modalInput.removeEventListener('keypress', handleKeypress);
+      customModal.removeEventListener('keydown', handleKeypress);
+    }
+  });
+}
+
 // Theme handling moved to `theme.js` (shared across pages)
 
 const homeBtn = document.getElementById('home');
@@ -172,8 +227,8 @@ function updateGlobal(){
 }
 
 /* ---------- SUBJECT ---------- */
-function addSubject(_restore){
-  const name = _restore ? _restore.name : prompt("Subject name");
+async function addSubject(_restore){
+  const name = _restore ? _restore.name : await customPrompt("Enter Subject Name");
   if(!name) return;
 
   let sec = _restore ? _restore.sec : 0;
@@ -269,8 +324,8 @@ function addSubject(_restore){
 }
 
 /* ---------- TOPIC ---------- */
-function addTopicFn(container,addToSubject,_restore){
-  const name = _restore ? _restore.name : prompt("Topic name");
+async function addTopicFn(container,addToSubject,_restore){
+  const name = _restore ? _restore.name : await customPrompt("Enter Topic Name");
   if(!name) return;
 
   let sec = _restore ? _restore.sec : 0;
