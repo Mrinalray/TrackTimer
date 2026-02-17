@@ -22,12 +22,37 @@ TrackTimer is a clean, minimal and powerful web-based productivity timer designe
 
 🎯 Clean, distraction-free UI
 
-🛠️ Tech Stack
+## 🧠 Tech Stack
 
-HTML5 – Structure
+| Layer      | Technology |
+|------------|------------|
+| Frontend   | HTML5 |
+| Styling    | CSS3 (Custom Properties) |
+| Logic      | JavaScript (Vanilla JS) |
+| Storage    | LocalStorage API |
+| Deployment | Netlify / GitHub Pages |
+## 📂 Folder Structure
 
-CSS3 – Styling & Responsive Design
-
-JavaScript (Vanilla JS) – Core Logic & Functionality
-
-GitHub Pages / Netlify – Deployment
+```
+TrackTimer/
+│
+├── index.html          # Landing page
+├── dashboard.html      # User dashboard
+├── analytics.html      # Progress analytics
+├── signin-signup.html  # Authentication page
+│
+├── css/
+│   ├── landing.css
+│   ├── dashboard.css
+│   ├── analytics.css
+│   └── signin-signup.css
+│
+├── js/
+│   ├── landing.js
+│   ├── dashboard.js
+│   ├── analytics.js
+│   ├── signin-signup.js
+│   └── theme.js
+│
+└── .github/workflows/
+```
