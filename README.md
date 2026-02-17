@@ -1,3 +1,9 @@
+## 📌 Open Source Program
+
+This project is officially accepted for:
+
+![JWoC Banner](assets/jwoc-banner.png)
+
 ⚡ TrackTimer – Your Personalised Study Timer
 
 Stay productive. Build habits. Track progress. Achieve more.
