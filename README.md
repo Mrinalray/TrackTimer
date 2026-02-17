@@ -1,9 +1,22 @@
 ## 📌 Open Source Program
 
-This project is officially accepted for:
+**This project is officially accepted for:**
 
 ![JWoC Banner](assets/jwoc-banner.png)
-[JWoC Accepted](assets/jwoc-accepted.jpg)
+---
+
+## 🏆 Official Recognition – JWoC 2026
+
+TrackTimer has been officially accepted and listed on the  
+**JGEC Winter of Code 2026 (JWoC 2026)** projects page.
+
+<p align="center">
+  <img src="assets/jwoc-accepted.jpg" alt="Official JWoC Project Listing" width="450"/>
+</p>
+
+This recognition marks the beginning of its open-source journey 🚀
+
+---
 
 ⚡ TrackTimer – Your Personalised Study Timer
 
