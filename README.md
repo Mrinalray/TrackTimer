@@ -76,3 +76,71 @@ TrackTimer/
 │
 └── .github/workflows/
 ```
+
+---
+
+## 🤝 Contributing to TrackTimer
+
+Thank you for your interest in contributing to **TrackTimer** 🚀  
+We welcome developers of all experience levels.
+
+---
+
+### ⭐ How to Contribute?
+
+1. Star this repository.
+2. Check existing Issues.
+3. Raise a new issue if needed.
+4. Wait until assigned.
+5. Create a separate branch.
+6. Submit a Pull Request.
+
+---
+
+### 📌 Contribution Rules
+
+- Do not work without being assigned.
+- Do not work on more than **3 issues at a time**.
+- Always create a new branch for every PR.
+- Keep commits clean and meaningful.
+- Do not modify unrelated files.
+- Add screenshots for UI changes.
+
+---
+
+## 🛠️ Installation & Setup
+
+TrackTimer is a static web project.
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/Mrinalray/TrackTimer.git
+## 🔀 How to Make a Pull Request
+
+### 1️⃣ Fork the Repository
+
+Click the **Fork** button at the top right of this repository.
+
+---
+
+### 2️⃣ Clone Your Fork
+
+```bash
+git clone https://github.com/<your-username>/TrackTimer.git
+3️⃣ Add Upstream Remote
+git remote add upstream https://github.com/Mrinalray/TrackTimer.git
+4️⃣ Create a New Branch
+git checkout -b feature/your-feature-name
+5️⃣ Make Your Changes
+
+Work only on the assigned issue and keep your changes clean.
+6️⃣ Stage Specific Files & Commit
+git add file-name
+git commit -m "Describe your changes clearly"
+7️⃣ Push Your Changes
+git push origin feature/your-feature-name
+8️⃣ Create a Pull Request
+
+Go to your forked repository on GitHub and click
+Compare & Pull Request to submit your PR for review.
