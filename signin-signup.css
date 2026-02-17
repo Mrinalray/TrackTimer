@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 :root{
-  --bg: #0f1115;
+  --bg: #9ac569;
   --card: #fff;
   --text: #fff;
   --muted: #aaa;
-  --accent: #512da8;
+  --accent: #66662c;
   --max-width: 768px;
   --radius: 14px;
   --fs-base: 16px;
@@ -15,7 +15,7 @@ html[data-theme="light"]{
   --bg: #fbfbfc;
   --card: #fff;
   --text: #0b1220;
-  --muted: #6b7280;
+  --muted: #43ddb1;
   --accent: #5c6bc0;
 }
 
@@ -66,14 +66,14 @@ body{
 }
 
 .container a{
-    color: #333;
+    color: #e1ee4c;
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
 }
 
 .container button{
-    background-color: #512da8;
+    background-color: #ec9f2b;
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -192,9 +192,9 @@ body{
 }
 
 .toggle{
-    background-color: #512da8;
+    background-color: #8fa82d;
     height: 100%;
-    background: linear-gradient(to right, #5c6bc0, #512da8);
+    background: linear-gradient(to right, #34b532, #95cf44);
     color: #fff;
     position: relative;
     left: -100%;
