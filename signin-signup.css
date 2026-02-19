@@ -253,19 +253,3 @@ body{
     color: #2e7d32;
 }
 }
-
-#password-wrapper{
-    position: relative;
-    width: 100%;
-}
-
-#password-button{
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    background: transparent;
-    top: 14px;
-    right: 8px;
-    color: #696a6b;
-    
-}

@@ -8,35 +8,19 @@ const signupMsg = document.getElementById('signupMsg');
 const signinMsg = document.getElementById('signinMsg');
 
 registerBtn.addEventListener('click', () => {
-  container.classList.add("active");
+    container.classList.add("active");
 });
 
 loginBtn.addEventListener('click', () => {
-  container.classList.remove("active");
+    container.classList.remove("active");
 });
 
 // simple users storage (for demo purposes only)
-function loadUsers() {
+function loadUsers(){
   return JSON.parse(localStorage.getItem('users') || '{}');
 }
-function saveUsers(u) {
+function saveUsers(u){
   localStorage.setItem('users', JSON.stringify(u));
-}
-// handle show Password
-function handlePasswordShow(inputId,eyeOnId,eyeOffId) {
-  const passwordInput = document.getElementById(inputId)
-  const eyeOn = document.getElementById(eyeOnId)
-  const eyeOff = document.getElementById(eyeOffId)
-
-  if (eyeOn.style.display === "none") {
-    eyeOff.style.display = "none";
-    eyeOn.style.display = "block";
-    passwordInput.setAttribute("type", "password");
-  } else {
-    eyeOff.style.display = "block";
-    eyeOn.style.display = "none";
-    passwordInput.setAttribute("type", "text");
-  }
 }
 
 signupForm.addEventListener('submit', (e) => {
@@ -45,13 +29,13 @@ signupForm.addEventListener('submit', (e) => {
   const name = document.getElementById('signupName').value.trim();
   const email = document.getElementById('signupEmail').value.trim().toLowerCase();
   const password = document.getElementById('signupPassword').value;
-  if (!name || !email || !password) {
+  if(!name || !email || !password){
     signupMsg.textContent = 'Please fill all fields';
     signupMsg.className = 'form-msg error';
     return;
   }
   const users = loadUsers();
-  if (users[email]) {
+  if(users[email]){
     signupMsg.textContent = 'Email already registered';
     signupMsg.className = 'form-msg error';
     return;
@@ -71,7 +55,7 @@ signinForm.addEventListener('submit', (e) => {
   const email = document.getElementById('signinEmail').value.trim().toLowerCase();
   const password = document.getElementById('signinPassword').value;
   const users = loadUsers();
-  if (!users[email] || users[email].password !== password) {
+  if(!users[email] || users[email].password !== password){
     signinMsg.textContent = 'Invalid email or password';
     signinMsg.className = 'form-msg error';
     return;
