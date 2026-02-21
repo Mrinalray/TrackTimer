@@ -68,7 +68,7 @@ const calendarEl = document.getElementById('calendar');
 const analyticsBtn = document.getElementById('analytics');
 
 homeBtn.addEventListener("click", () => {
-  window.location.href = "landing.html";
+  window.location.href = "index.html";
 });
 
 analyticsBtn.addEventListener("click", () => {
