@@ -96,6 +96,31 @@ body {
       margin-bottom: 30px;
     }
 
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: var(--card);
+      border: 1px solid #1f2937;
+      transition: all 0.2s ease;
+      margin-bottom: 20px;
+    }
+
+    .back-btn ion-icon {
+      font-size: 18px;
+    }
+
+    .back-btn:hover {
+      background: #1f2937;
+      color: var(--text);
+      transform: translateX(-4px);
+    }
+
     h2 {
       margin: 40px 0 15px;
       font-weight: 500;
