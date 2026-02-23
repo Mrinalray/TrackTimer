@@ -2,24 +2,6 @@ const container = document.getElementById('container');
 const registerBtn = document.getElementById('register');
 const loginBtn = document.getElementById('login');
 
-// Supabase Initialization
-const { createClient } = supabase;
-const supabaseClient = createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
-
-// Google Auth Handler
-document.querySelectorAll('.google-auth').forEach(btn => {
-  btn.addEventListener('click', async (e) => {
-    e.preventDefault();
-    const { data, error } = await supabaseClient.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: window.location.origin + window.location.pathname.replace('signin-signup.html', 'dashboard.html')
-      }
-    });
-    if (error) console.error('Error logging in with Google:', error.message);
-  });
-});
-
 const signupForm = document.getElementById('signupForm');
 const signinForm = document.getElementById('signinForm');
 const signupMsg = document.getElementById('signupMsg');
@@ -41,7 +23,7 @@ function saveUsers(u) {
   localStorage.setItem('users', JSON.stringify(u));
 }
 // handle show Password
-function handlePasswordShow(inputId, eyeOnId, eyeOffId) {
+function handlePasswordShow(inputId,eyeOnId,eyeOffId) {
   const passwordInput = document.getElementById(inputId)
   const eyeOn = document.getElementById(eyeOnId)
   const eyeOff = document.getElementById(eyeOffId)
