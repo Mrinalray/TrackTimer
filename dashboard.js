@@ -84,9 +84,26 @@ const profileEmailEl = document.getElementById('profileEmail');
 const signOutBtn = document.getElementById('signOut');
 const goSignInBtn = document.getElementById('goSignIn');
 
-function updateProfileUI(){
+async function updateProfileUI() {
+  // Check Supabase session first
+  if (typeof supabase !== 'undefined' && typeof CONFIG !== 'undefined') {
+    const { createClient } = supabase;
+    const supabaseClient = createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+    const { data: { session } } = await supabaseClient.auth.getSession();
+
+    if (session && session.user) {
+      const user = session.user;
+      const userData = {
+        name: user.user_metadata.full_name || user.email.split('@')[0],
+        email: user.email,
+        avatar: user.user_metadata.avatar_url
+      };
+      localStorage.setItem('currentUser', JSON.stringify(userData));
+    }
+  }
+
   const cur = JSON.parse(localStorage.getItem('currentUser') || 'null');
-  if(cur && cur.name){
+  if (cur && cur.name) {
     profileLabel.textContent = cur.name.split(' ')[0];
     profileNameEl.textContent = cur.name;
     profileEmailEl.textContent = cur.email || '';
@@ -112,7 +129,12 @@ goSignInBtn.addEventListener('click', () => {
   window.location.href = "signin-signup.html";
 });
 
-signOutBtn.addEventListener('click', () => {
+signOutBtn.addEventListener('click', async () => {
+  if (typeof supabase !== 'undefined' && typeof CONFIG !== 'undefined') {
+    const { createClient } = supabase;
+    const supabaseClient = createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+    await supabaseClient.auth.signOut();
+  }
   localStorage.removeItem('currentUser');
   updateProfileUI();
   profileDropdown.classList.add('hidden');
@@ -120,8 +142,8 @@ signOutBtn.addEventListener('click', () => {
 
 // close dropdown when clicking outside
 document.addEventListener('click', (e) => {
-  if(!profileDropdown.classList.contains('hidden')){
-    if(!profileDropdown.contains(e.target) && e.target !== profileBtn) {
+  if (!profileDropdown.classList.contains('hidden')) {
+    if (!profileDropdown.contains(e.target) && e.target !== profileBtn) {
       profileDropdown.classList.add('hidden');
       profileDropdown.setAttribute('aria-hidden', 'true');
     }
@@ -185,25 +207,25 @@ renderCalendar();
 // ========= timers ================//
 
 /* ---------- INDIA DATE HELPERS ---------- */
-function indiaNow(){
-  return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Kolkata"}));
+function indiaNow() {
+  return new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
 }
 
-function dateKeyIndia(d){
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+function dateKeyIndia(d) {
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 }
 
-date.textContent=indiaNow().toDateString();
+date.textContent = indiaNow().toDateString();
 
 /* ---------- FORMAT ---------- */
-function fmt(s){
-  return [s/3600,s%3600/60,s%60]
-    .map(v=>String(Math.floor(v)).padStart(2,"0")).join(":");
+function fmt(s) {
+  return [s / 3600, s % 3600 / 60, s % 60]
+    .map(v => String(Math.floor(v)).padStart(2, "0")).join(":");
 }
 
 /* ---------- GLOBAL ---------- */
-let globalSec=0;
-const studiedDays=JSON.parse(localStorage.getItem("studiedDays")||"{}");
+let globalSec = 0;
+const studiedDays = JSON.parse(localStorage.getItem("studiedDays") || "{}");
 
 /*
  * SINGLE ACTIVE TIMER CONTROLLER
@@ -214,49 +236,49 @@ const studiedDays=JSON.parse(localStorage.getItem("studiedDays")||"{}");
  */
 let activeTimer = null; // { intervalId, stopFn }
 
-function stopActive(){
-  if(!activeTimer) return;
+function stopActive() {
+  if (!activeTimer) return;
   clearInterval(activeTimer.intervalId);
   activeTimer.stopFn();
   activeTimer = null;
 }
 
 /* ---------- GLOBAL UPDATE ---------- */
-function updateGlobal(){
-  globalTimer.textContent=fmt(globalSec);
+function updateGlobal() {
+  globalTimer.textContent = fmt(globalSec);
 }
 
 /* ---------- SUBJECT ---------- */
-async function addSubject(_restore){
+async function addSubject(_restore) {
   const name = _restore ? _restore.name : await customPrompt("Enter Subject Name");
-  if(!name) return;
+  if (!name) return;
 
   let sec = _restore ? _restore.sec : 0;
-  let running=false;
+  let running = false;
 
-  const subject=document.createElement("div");
-  subject.className="subject";
+  const subject = document.createElement("div");
+  subject.className = "subject";
 
-  const row=document.createElement("div");
-  row.className="subject-row";
+  const row = document.createElement("div");
+  row.className = "subject-row";
 
-  const title=document.createElement("span");
-  title.textContent=name;
+  const title = document.createElement("span");
+  title.textContent = name;
 
-  const actions=document.createElement("div");
-  actions.className="actions";
+  const actions = document.createElement("div");
+  actions.className = "actions";
 
-  const time=document.createElement("span");
-  time.className="time";
-  time.textContent=fmt(sec);
+  const time = document.createElement("span");
+  time.className = "time";
+  time.textContent = fmt(sec);
 
   // Function to update subject timer display
-  function updateSubjectTime(){
-    time.textContent=fmt(sec);
+  function updateSubjectTime() {
+    time.textContent = fmt(sec);
   }
 
-  function tick(){
-    sec++; 
+  function tick() {
+    sec++;
     globalSec++;
     updateSubjectTime();
     updateGlobal();
@@ -264,16 +286,16 @@ async function addSubject(_restore){
   }
 
   // called by stopActive() when something else takes over
-  function subjectStopUI(){
+  function subjectStopUI() {
     running = false;
     play.textContent = "▶";
   }
 
-  const play=document.createElement("button");
-  play.className="play";
-  play.textContent="▶";
-  play.onclick=()=>{
-    if(running){
+  const play = document.createElement("button");
+  play.className = "play";
+  play.textContent = "▶";
+  play.onclick = () => {
+    if (running) {
       stopActive();
     } else {
       stopActive();
@@ -284,36 +306,36 @@ async function addSubject(_restore){
     }
   };
 
-  const del=document.createElement("button");
-  del.className="delete";
-  del.textContent="🗑";
-  del.onclick=()=>{
+  const del = document.createElement("button");
+  del.className = "delete";
+  del.textContent = "🗑";
+  del.onclick = () => {
     stopActive();
-    globalSec-=sec;
+    globalSec -= sec;
     subject.remove();
     updateGlobal();
     saveAll();
   };
 
-  actions.append(time,play,del);
-  row.append(title,actions);
+  actions.append(time, play, del);
+  row.append(title, actions);
 
-  const topics=document.createElement("div");
-  topics.className="topics";
+  const topics = document.createElement("div");
+  topics.className = "topics";
 
-  const addTopic=document.createElement("button");
-  addTopic.className="add-topic";
-  addTopic.textContent="+ Topic";
+  const addTopic = document.createElement("button");
+  addTopic.className = "add-topic";
+  addTopic.textContent = "+ Topic";
   addTopic.onclick = () => addTopicFn(topics, (topicSec) => {
     sec += topicSec;             // Add topic seconds to subject
     updateSubjectTime();         // Update subject timer display
   });
 
-  subject.append(row,addTopic,topics);
+  subject.append(row, addTopic, topics);
   subjects.appendChild(subject);
 
   // restore saved topics into this subject
-  if(_restore && _restore.topics){
+  if (_restore && _restore.topics) {
     _restore.topics.forEach(t => {
       addTopicFn(topics, (topicSec) => {
         sec += topicSec;
@@ -324,46 +346,46 @@ async function addSubject(_restore){
 }
 
 /* ---------- TOPIC ---------- */
-async function addTopicFn(container,addToSubject,_restore){
+async function addTopicFn(container, addToSubject, _restore) {
   const name = _restore ? _restore.name : await customPrompt("Enter Topic Name");
-  if(!name) return;
+  if (!name) return;
 
   let sec = _restore ? _restore.sec : 0;
-  let running=false;
+  let running = false;
 
-  const div=document.createElement("div");
-  div.className="topic";
+  const div = document.createElement("div");
+  div.className = "topic";
 
-  const label=document.createElement("span");
-  label.textContent=name;
+  const label = document.createElement("span");
+  label.textContent = name;
 
-  const actions=document.createElement("div");
-  actions.className="actions";
+  const actions = document.createElement("div");
+  actions.className = "actions";
 
-  const time=document.createElement("span");
-  time.className="time";
-  time.textContent=fmt(sec);
+  const time = document.createElement("span");
+  time.className = "time";
+  time.textContent = fmt(sec);
 
-  function tick(){
-    sec++; 
-    globalSec++; 
+  function tick() {
+    sec++;
+    globalSec++;
     addToSubject(1); // increment subject timer by 1 sec
-    time.textContent=fmt(sec);
+    time.textContent = fmt(sec);
     updateGlobal();
     saveAll();
   }
 
   // called by stopActive() when something else takes over
-  function topicStopUI(){
+  function topicStopUI() {
     running = false;
     play.textContent = "▶";
   }
 
-  const play=document.createElement("button");
-  play.className="play";
-  play.textContent="▶";
-  play.onclick=()=>{
-    if(running){
+  const play = document.createElement("button");
+  play.className = "play";
+  play.textContent = "▶";
+  play.onclick = () => {
+    if (running) {
       stopActive();
     } else {
       stopActive();
@@ -374,20 +396,20 @@ async function addTopicFn(container,addToSubject,_restore){
     }
   };
 
-  const del=document.createElement("button");
-  del.className="delete";
-  del.textContent="🗑";
-  del.onclick=()=>{
-    if(running) stopActive();
-    globalSec-=sec;
+  const del = document.createElement("button");
+  del.className = "delete";
+  del.textContent = "🗑";
+  del.onclick = () => {
+    if (running) stopActive();
+    globalSec -= sec;
     addToSubject(-sec); // remove topic time from subject
     div.remove();
     updateGlobal();
     saveAll();
   };
 
-  actions.append(time,play,del);
-  div.append(label,actions);
+  actions.append(time, play, del);
+  div.append(label, actions);
   container.appendChild(div);
 }
 
@@ -396,13 +418,13 @@ async function addTopicFn(container,addToSubject,_restore){
 const SUBJECTS_KEY = "savedSubjects";
 
 // "HH:MM:SS" → total seconds
-function timeToSec(str){
+function timeToSec(str) {
   const [h, m, s] = str.split(":").map(Number);
   return h * 3600 + m * 60 + s;
 }
 
 // reads the live DOM and writes everything to localStorage
-function saveAll(){
+function saveAll() {
   const data = [];
 
   document.querySelectorAll("#subjects > .subject").forEach(subjectEl => {
@@ -430,7 +452,7 @@ function saveAll(){
 }
 
 // runs once on page load — rebuilds every subject + topic from saved data
-function restoreAll(){
+function restoreAll() {
   const saved = JSON.parse(localStorage.getItem(SUBJECTS_KEY) || "[]");
   const savedGlobal = Number(localStorage.getItem("globalSec") || 0);
 
