@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="signin-signup.css">
     <title>Modern Login Page | AsmrProg</title>
-    <!-- Supabase SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="config.js"></script>
 </head>
 
 <body>
@@ -20,7 +17,7 @@
             <form id="signupForm">
                 <h1>Create Account</h1>
                 <div class="social-icons">
-                    <a href="#" class="icon google-auth"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -31,8 +28,7 @@
                 <div id="password-wrapper">
                     <input id="signupPassword" type="password" placeholder="Password" required>
                     <!-- show and hide password -->
-                    <button id="password-button" type="button"
-                        onclick="handlePasswordShow('signupPassword','showSignupPassword','hideSignupPassword')">
+                    <button id="password-button" type="button" onclick="handlePasswordShow('signupPassword','showSignupPassword','hideSignupPassword')">
                         <!-- show password -->
                         <span id="showSignupPassword">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -58,7 +54,7 @@
                         </span>
                     </button>
                 </div>
-                <button id="signUp" type="submit">Sign Up</button>
+                 <button id="signUp" type="submit">Sign Up</button>
                 <div class="form-msg" id="signupMsg" aria-live="polite"></div>
             </form>
         </div>
@@ -66,7 +62,7 @@
             <form id="signinForm">
                 <h1>Sign In</h1>
                 <div class="social-icons">
-                    <a href="#" class="icon google-auth"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -76,8 +72,7 @@
                 <div id="password-wrapper">
                     <input id="signinPassword" type="password" placeholder="Password" required>
                     <!-- show and hide password -->
-                    <button id="password-button" type="button"
-                        onclick="handlePasswordShow('signinPassword','showSigninPassword','hideSigninPassword')">
+                    <button id="password-button" type="button" onclick="handlePasswordShow('signinPassword','showSigninPassword','hideSigninPassword')">
                         <!-- show password -->
                         <span id="showSigninPassword">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
