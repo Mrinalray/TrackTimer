@@ -233,3 +233,108 @@ html[data-theme="light"] .dashboard-stat{
   padding: 6rem 8%;
   box-sizing: border-box;
 }
+  position: fixed;
+  top: 70px;
+  right: -100%;
+  width: 100%;
+  height: calc(100vh - 70px);
+  background: rgba(2,6,23,0.98);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  transition: 0.4s ease;
+  z-index: 999;
+}
+
+.mobile-menu.active {
+  right: 0;
+}
+
+/* Responsive */
+
+@media(max-width: 1024px) {
+  .nav-btns {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+
+/* ================= TABLET ================= */
+
+@media (min-width: 640px) {
+  .hero h1 {
+    font-size: 56px;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+
+  .dashboard-stat {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .btn {
+    width: auto;
+  }
+}
+
+/* ================= LAPTOP ================= */
+
+@media (min-width: 1024px) {
+  .nav-btns {
+    display: flex;
+    gap: 12px;
+  }
+
+  .hero h1 {
+    font-size: 80px;
+  }
+
+  .hero-btns {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .dashboard-stat {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+=======
+  position:fixed;
+  top:70px;
+  right:-100%;
+  width:100%;
+  height:calc(100vh - 70px);
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+  transition:0.4s ease;
+  z-index:999;
+}
+
+
+.mobile-menu.active { right:0; }   
+
+/* FIX FEATURES ALIGNMENT */
+.features {
+  width: 100%;
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 6rem 8%;
+  box-sizing: border-box;
+>>>>>>> main
+}
+
