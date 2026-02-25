@@ -226,13 +226,10 @@ html[data-theme="light"] .dashboard-stat{
 .mobile-menu.active { right:0; }   
 
 /* FIX FEATURES ALIGNMENT */
-
 .features {
   width: 100%;
   max-width: 1200px;
   margin: 80px auto;
-  padding: 0 8%;
-}
-.features {
-  text-align: center;
+  padding: 6rem 8%;
+  box-sizing: border-box;
 }
