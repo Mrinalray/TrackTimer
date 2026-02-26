@@ -24,7 +24,7 @@ Stay productive. Build habits. Track progress. Achieve more.
 
 TrackTimer is a clean, minimal and powerful web-based productivity timer designed to help students stay focused, build consistent study habits, and visualize their progress like GitHub contributions.
 
-🌐 Live Demo: https://tracktimer-teamxvirus.netlify.app
+🌐 Live Demo: https://mrinalray.github.io/TrackTimer/
 
 🚀 Features
 
